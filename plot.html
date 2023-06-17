@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<head>
+    <!-- This is OLD - version 4 of d3 from 2016 -->
+    <script src='https://d3js.org/d3.v4.min.js'></script>
+
+</head>
+
+<body>
+    <div id="myplot"></div>
+</body>
+<script type="module">
+
+    import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
+
+    d3.json("/data/olympians.json", function (olympians) {
+
+        const div = document.querySelector("#myplot");
+
+        const plot = Plot.density(olympians, { x: "weight", y: "height", stroke: "sex" }).plot()
+        div.append(plot);
+
+        const plot2 = Plot.plot({
+            y: { grid: true },
+            color: { legend: true },
+            marks: [
+                // this has to be numeric
+                Plot.rectY(olympians, Plot.binX({ y: "count" }, { x: "weight", fill: "sex" })),
+                Plot.ruleY([0])
+            ]
+        })
+
+        div.append(plot2);
+
+        const plot4 = Plot.plot({
+            y: { grid: true },
+            color: { legend: true },
+            marks: [
+                Plot.rectY(olympians, Plot.binX({ y: "count" }, { x: "height", fill: "sex" })),
+                Plot.ruleY([0])
+            ]
+        })
+
+        div.append(plot4)
+    });
+
+</script>
