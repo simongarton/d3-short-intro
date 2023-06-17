@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- This is OLD - version 4 of d3 from 2016 -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+    <h1>Hello world</h1>
+
+    <p id="warning">I'm not necessary.</p>
+
+    <h2>Chart</h2>
+
+    <svg width="700" height="500"></svg>
+
+    <p>Some more text that is after the svg.</p>
+</body>
+
+<script>
+
+    // start off with some styles of existing elements
+
+    // d3.select("p").style("color", "blue");
+    // d3.selectAll("p").style("color", "blue");
+
+    // now I'm going to change things
+
+    // incrementally change styles, weights and then remove it.
+
+    // var p = d3.select("#warning")
+    //     .style("color", "red")
+    //     .style('font-weight', 'bold')
+    //     .remove();
+
+    // and adding some stuff in
+    // d3.select('p')
+    //     .append('div')
+    //     .text('But I\'m useful.')
+    //     .style('color', 'orange')
+
+    // svg is my placeholder element
+    // change it's style so I can see it more clearly.
+
+    // var svg = d3.select('svg');
+    // svg.attr('class', 'graph-svg-component')
+
+    // now create a smaller shape inside the first svg for the plot area
+
+    // var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+    //     width = +svg.attr("width") - margin.left - margin.right,
+    //     height = +svg.attr("height") - margin.top - margin.bottom,
+    //     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    // let's create some data - here I just create manual JSON, but this
+    // would probably be the result of an API call.
+
+    // var data = [
+    //     { 'date': '2023-01-01', 'value': 5 },
+    //     { 'date': '2023-01-02', 'value': 4.9 },
+    //     { 'date': '2023-01-12', 'value': 6.4 },
+    //     { 'date': '2023-01-13', 'value': 6.2 },
+    //     { 'date': '2023-01-15', 'value': 7 }
+    // ]
+    // console.log(data);
+
+    // some magic - create an scale, time based, with a domain of values
+    // retrieved from the extent of the data (by getting the dates) that
+    // will fit the width of the g element.
+
+    var x = d3.scaleTime()
+        .domain(d3.extent(data, function (d) { return d3.timeParse("%Y-%m-%d")(d.date) }))
+        .range([0, width]);
+
+    // and now more magic, get d3 to build the axis given our scale.
+
+    // g.append("g")
+    //     // but it needs to be on the bottom
+    //     .attr("transform", "translate(0," + height + ")")
+    //     .call(d3.axisBottom(x));
+
+    // repeat for the y axis, putting it left
+
+    // var y = d3.scaleLinear()
+    //     .domain([0, d3.max(data, function (d) { return d.value; })])
+    //     .range([height, 0]);
+    // g.append("g")
+    //     .call(d3.axisLeft(y));
+
+    // now create some lines using d3's magic line function
+
+    // g.append("path")
+    //     .datum(data)
+    //     .attr("fill", "none")
+    //     .attr("stroke", "green")
+    //     .attr("stroke-width", 3)
+    //     .attr("d", d3.line()
+    //         // .curve(d3.curveBasis)
+    //         .x(function (d) { return x(d3.timeParse("%Y-%m-%d")(d.date)) })
+    //         .y(function (d) { return y(d.value) })
+        )
+
+    // g.append('g')
+    //     .selectAll("dot")
+    //     .data(data)
+    //     .enter()
+    //     .append("circle")
+    //     .attr("cx", function (d) { return x(d3.timeParse("%Y-%m-%d")(d.date)); })
+    //     .attr("cy", function (d) { return y(+d.value); })
+    //     .attr("r", 5)
+    //     .style("fill", function (d, i) { return d3.schemeCategory10[i]; })
+    //     .style("stroke", "yellow")
+
+    // g.append('g')
+    //     .selectAll("label")
+    //     .data(data)
+    //     .enter()
+    //     .append("text")
+    //     .attr("x", function (d) { return 10 + x(d3.timeParse("%Y-%m-%d")(d.date)); })
+    //     .attr("y", function (d) { return 20 + y(+d.value); })
+    //     .text(function (d) { return +d.value; })
+    //     // .attr("text-anchor", "end")
+    //     .style("fill", "darkblue")
+
+    // g.selectAll("mydots")
+    //     .data(data)
+    //     .enter()
+    //     .append("circle")
+    //     .attr("cx", 20)
+    //     .attr("cy", function (d, i) { return 10 + i * 25 })
+    //     .attr("r", 7)
+    //     .style("fill", function (d, i) { return d3.schemeCategory10[i] })
+
+    // g.selectAll("mylabels")
+    //     .data(data)
+    //     .enter()
+    //     .append("text")
+    //     .attr("x", 40)
+    //     .attr("y", function (d, i) { return 10 + i * 25 })
+    //     .style("fill", function (d, i) { return d3.schemeCategory10[i] })
+    //     .text(function (d, i) { return d.date; })
+    //     .attr("text-anchor", "left")
+    //     .attr("font-size", "large")
+    //     .style("alignment-baseline", "middle")
+
+    // d3.select('h1').text("All done !")
+
+</script>
+
+</html>

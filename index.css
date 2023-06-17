@@ -1,0 +1,12 @@
+body {
+    background-color: antiquewhite;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    color: darkgreen;
+}
+
+.graph-svg-component {
+    background-color: cornflowerblue;
+}
