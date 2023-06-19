@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- This is OLD - version 4 of d3 from 2016 -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+    <h1>Observable Plot</h1>
+
+    <div id="myplot"></div>
+</body>
+
+<script type="module">
+
+    import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
+
+    // let's create some data - here I just create manual JSON, but this
+    // would probably be the result of an API call.
+
+    var data = [
+        { 'date': '2023-01-01', 'value': 5 },
+        { 'date': '2023-01-02', 'value': 4.9 },
+        { 'date': '2023-01-12', 'value': 6.4 },
+        { 'date': '2023-01-13', 'value': 6.2 },
+        { 'date': '2023-01-15', 'value': 7 }
+    ]
+    console.log(data);
+
+    var plot = Plot.plot({
+        marks: [
+            Plot.line(data, { x: "date", y: "value", fill:"date" })
+        ],
+        color: { legend: true },
+        marginLeft: 100
+    })
+
+    const div = document.querySelector("#myplot");
+
+    div.append(plot);
+
+</script>
+
+</html>
