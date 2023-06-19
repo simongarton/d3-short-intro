@@ -28,7 +28,9 @@
 
     // now I'm going to change things
 
-    // incrementally change styles, weights and then remove it.
+    d3.select('h1').text('Bonjour le monde');
+
+    // incrementally - one line at a time - change styles, weights and then remove it.
 
     var p = d3.select('#useless')
         .style('color', 'red')
@@ -75,6 +77,11 @@
     var x = d3.scaleTime()
         .domain(d3.extent(data, function (d) { return d3.timeParse('%Y-%m-%d')(d.date) }))
         .range([0, width]);
+
+
+    // now this is quite cool.
+    console.log(width)
+    console.log(x(new Date('2023-01-01')))
 
     // and now more magic, get d3 to build the axis given our scale.
 
